@@ -5,8 +5,10 @@
 #ifndef ASSIGNMENT3_GPS_UTILS_H
 #define ASSIGNMENT3_GPS_UTILS_H
 
-void readGPSFunc();
+#include <gps.h>
 
-void handleError();
+void readGPSFunc(struct gps_data_t *gpsdata);
+
+void handleError(const int error);
 
 #endif //ASSIGNMENT3_GPS_UTILS_H
