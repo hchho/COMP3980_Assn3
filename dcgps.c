@@ -8,15 +8,14 @@
 int main() {
 
     static struct fixsource_t source;
-    struct gps_data_t* gps_data_ptr = malloc(sizeof(struct gps_data_t));
+    struct gps_data_t *gps_data_ptr = malloc(sizeof(struct gps_data_t));
     
     source.server = LOCAL_HOST;
     source.port = DEFAULT_GPSD_PORT;
-    source.device = NULL;
 
-    unsigned int flags = WATCH_ENABLE;
+    unsigned int flags = WATCH_ENABLE | WATCH_JSON;
     
-    if (gps_open(source.server, source.port, gps_data_ptr) != 0) {
+    if (gps_open(source.server, server.port, gps_data_ptr) != 0) {
         handleError(-4);
         exit(1);
     } 
@@ -24,6 +23,8 @@ int main() {
     if (source.device != NULL) {
         flags |= WATCH_DEVICE;
     }
+    
+    gps_stream(gps_data_ptr, flags, NULL);
 
     readGPSFunc(gps_data_ptr);
 

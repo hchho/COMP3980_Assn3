@@ -11,3 +11,12 @@ gps-utils.o:
 	$(CC) -c gps-utils.c
 gpsprint.o:
 	$(CC) -c gpsprint.c
+prep_cgps:
+	sudo systemctl stop gpsd.socket
+	sudo systemctl disable gpsd.socket
+	sudo killall gpsd
+	sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.socket
+prep_gps:
+	sudo systemctl stop gpsd.socket
+	sudo systemctl disable gpsd.socket
+	sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.socket
