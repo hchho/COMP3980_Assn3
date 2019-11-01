@@ -15,7 +15,7 @@ int main() {
 
     unsigned int flags = WATCH_ENABLE | WATCH_JSON;
     
-    if (gps_open(source.server, "2947", gps_data_ptr) != 0) {
+    if (gps_open(source.server, server.port, gps_data_ptr) != 0) {
         handleError(-4);
         exit(1);
     } 
