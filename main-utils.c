@@ -7,6 +7,12 @@
 #include "gpsview.h"
 #include "main-utils.h"
 
+void setupSocket() {
+    system("sudo systemctl stop gpsd.socket");
+    system("sudo systemctl disable gpsd.socket");
+    system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.socket");
+}
+
 void moveCursorUp(int numberOfLines) {
     printf("%c[%dA", 033, numberOfLines);
 }

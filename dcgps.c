@@ -6,6 +6,7 @@
 #include "main-utils.h"
 
 int main() {
+    setupSocket();
 
     static struct fixsource_t source;
     struct gps_data_t *gps_data_ptr = malloc(sizeof(struct gps_data_t));

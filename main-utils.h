@@ -7,6 +7,8 @@
 
 #include <gps.h>
 
+void setupSocket();
+
 void handleError(int error);
 
 void moveCursorUp(int numberOfLines);
