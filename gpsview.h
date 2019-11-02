@@ -7,6 +7,6 @@
 
 #include <gps.h>
 
-void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool flag);
+void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid);
 
 #endif //ASSIGNMENT3_GPSVIEW_H

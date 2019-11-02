@@ -4,7 +4,11 @@
 
 #include "gpsview.h"
 
-void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool flag) {
+void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid) {
+    if (!isDataValid) {
+        return;
+    }
+
     char * link = (const char *) malloc(64);
     *link = '\0';
 
