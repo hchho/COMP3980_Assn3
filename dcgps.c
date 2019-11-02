@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <gps.h>
 #include "dcgps.h"
-#include "gps-utils.h"
-#include "ERRNO.h"
+#include "main-utils.h"
 
 int main() {
 
@@ -18,15 +18,21 @@ int main() {
     if (gps_open(source.server, source.port, gps_data_ptr) != 0) {
         handleError(-4);
         exit(1);
-    } 
+    }
 
     if (source.device != NULL) {
         flags |= WATCH_DEVICE;
     }
-    
+
     gps_stream(gps_data_ptr, flags, NULL);
 
-    readGPSFunc(gps_data_ptr);
+    int input[1];
+    printOptions();
+    scanf("%d", input);
+
+    void (*handler)(struct gps_data_t *) = getOptionHandler(input[0]);
+
+    readGPSFunc(gps_data_ptr, handler);
 
     gps_stream(gps_data_ptr, WATCH_DISABLE, NULL);
     gps_close(gps_data_ptr);

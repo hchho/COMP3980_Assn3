@@ -9,10 +9,6 @@
 
 bool isGPSDataValid(struct gps_data_t *gpsdata);
 
-void readGPSFunc(struct gps_data_t *gpsdata);
-
-void (*handleProgramMode(const int mode)) ();
-
-void handleError(const int error);
+void readGPSFunc(struct gps_data_t *gpsdata, void (fn)(struct gps_data_t*));
 
 #endif //ASSIGNMENT3_GPS_UTILS_H

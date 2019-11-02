@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "gpsprint.h"
 #include "gps-utils.h"
+#include "main-utils.h"
 #include "ERRNO.h"
 
 bool isGPSDataValid(struct gps_data_t *gps_data_ptr) {
@@ -16,16 +17,18 @@ bool isGPSDataValid(struct gps_data_t *gps_data_ptr) {
                     !isnan(gps_data_ptr->fix.longitude);
 }
 
-void readGPSFunc(struct gps_data_t *gps_data_ptr) {
+void readGPSFunc(struct gps_data_t *gps_data_ptr, void (gpsProcessor)(struct gps_data_t *)) {
     const int TIMEOUT = 500000; // 1/2 second timeout
     const int MAX_WAIT = 20;
     int wait_count = 0;
     for (;;) {
         if (!gps_waiting(gps_data_ptr, TIMEOUT)) {
+            printf("Waiting...%d sec\n", wait_count / 2);
             if (wait_count++ > MAX_WAIT) {
                 handleError(-3);
                 exit(1);
             }
+            moveCursorUp(1);
         } else {
             errno = 0;
             wait_count = 0;
@@ -34,31 +37,9 @@ void readGPSFunc(struct gps_data_t *gps_data_ptr) {
                 exit(1);
             } else {
                 if (isGPSDataValid(gps_data_ptr)) {
-                    printGpsData(gps_data_ptr);
-                } else {
-                    printf("No GPS data\n");
+                    gpsProcessor(gps_data_ptr);
                 }
             }
         }
-    }
-}
-
-void handleError(int error) {
-    switch(error) {
-        case -1:
-            printf("GPS signal gone\n");
-            break;
-        case -2:
-            printf("GPS error\n");
-            break;
-        case -3:
-            printf("Timeout error\n");
-            break;
-        case -4:
-            printf("Network error\n");
-            break;
-        default:
-            printf("Unknown error\n");
-            break;
     }
 }
