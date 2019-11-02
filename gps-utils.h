@@ -11,8 +11,4 @@ bool isGPSDataValid(struct gps_data_t *gpsdata);
 
 void readGPSFunc(struct gps_data_t *gpsdata, void (fn)(struct gps_data_t*));
 
-void moveCursorUp(int numberOfLines);
-
-void (*getOptionHandler(const int option))(struct gps_data_t *);
-
 #endif //ASSIGNMENT3_GPS_UTILS_H

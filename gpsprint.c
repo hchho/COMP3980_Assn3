@@ -3,7 +3,7 @@
 //
 
 #include "gpsprint.h"
-#include "gps-utils.h"
+#include "main-utils.h"
 #include <gps.h>
 
 void printGpsData(struct gps_data_t *gps_data_ptr) {

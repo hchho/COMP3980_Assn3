@@ -7,11 +7,8 @@
 #include <stdio.h>
 #include "gpsprint.h"
 #include "gps-utils.h"
+#include "main-utils.h"
 #include "ERRNO.h"
-
-void moveCursorUp(int numberOfLines) {
-    printf("%c[%dA", 033, numberOfLines);
-}
 
 bool isGPSDataValid(struct gps_data_t *gps_data_ptr) {
     return (gps_data_ptr->status == STATUS_FIX) &&
@@ -44,36 +41,5 @@ void readGPSFunc(struct gps_data_t *gps_data_ptr, void (fn)(struct gps_data_t *)
                 }
             }
         }
-    }
-}
-
-void handleError(int error) {
-    switch(error) {
-        case -1:
-            printf("GPS signal gone\n");
-            break;
-        case -2:
-            printf("GPS error\n");
-            break;
-        case -3:
-            printf("Timeout error\n");
-            break;
-        case -4:
-            printf("Network error\n");
-            break;
-        default:
-            printf("Unknown error\n");
-            break;
-    }
-}
-
-void (*getOptionHandler(const int option))(struct gps_data_t *) {
-    switch(option) {
-        case 1: // Stream GPS data
-            return printGpsData;
-        default:
-            printf("Unvailable option\n");
-            exit(1);
-            return;
     }
 }

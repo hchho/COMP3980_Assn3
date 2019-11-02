@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <gps.h>
 #include "dcgps.h"
-#include "gps-utils.h"
-#include "gpsprint.h"
-#include "ERRNO.h"
+#include "main-utils.h"
 
 int main() {
 
@@ -33,7 +31,7 @@ int main() {
     printf("2 - View location on Google Maps\n");
     scanf("%d", input);
 
-    void (*handler)(struct gps_data_t *) = getHandler(input[0]);
+    void (*handler)(struct gps_data_t *) = getOptionHandler(input[0]);
 
     readGPSFunc(gps_data_ptr, handler);
 
