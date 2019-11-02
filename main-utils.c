@@ -11,6 +11,7 @@ void setupSocket() {
     system("sudo systemctl stop gpsd.socket");
     system("sudo systemctl disable gpsd.socket");
     system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.socket");
+    system("clear");
 }
 
 void moveCursorUp(int numberOfLines) {
