@@ -16,7 +16,7 @@ void viewGPSLocation(struct gps_data_t *gps_data_ptr) {
 
     strcat(link, "xdg-open https://www.google.ca/maps/@");
     strcat(link, latitude);
-    strcat(link, ",-");
+    strcat(link, ",");
     strcat(link, longitude);
     strcat(link, ",14z");
 
