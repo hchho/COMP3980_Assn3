@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <gps.h>
 #include "dcgps.h"
 #include "main-utils.h"
@@ -17,7 +18,7 @@ int main() {
     if (gps_open(source.server, source.port, gps_data_ptr) != 0) {
         handleError(-4);
         exit(1);
-    } 
+    }
 
     if (source.device != NULL) {
         flags |= WATCH_DEVICE;
@@ -26,9 +27,7 @@ int main() {
     gps_stream(gps_data_ptr, flags, NULL);
 
     int input[1];
-    printf("Enter option for this program:\n");
-    printf("1 - Stream live GPS data\n");
-    printf("2 - View location on Google Maps\n");
+    printOptions();
     scanf("%d", input);
 
     void (*handler)(struct gps_data_t *) = getOptionHandler(input[0]);

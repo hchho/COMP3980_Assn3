@@ -17,7 +17,7 @@ bool isGPSDataValid(struct gps_data_t *gps_data_ptr) {
                     !isnan(gps_data_ptr->fix.longitude);
 }
 
-void readGPSFunc(struct gps_data_t *gps_data_ptr, void (fn)(struct gps_data_t *)) {
+void readGPSFunc(struct gps_data_t *gps_data_ptr, void (gpsProcessor)(struct gps_data_t *)) {
     const int TIMEOUT = 500000; // 1/2 second timeout
     const int MAX_WAIT = 20;
     int wait_count = 0;
@@ -37,7 +37,7 @@ void readGPSFunc(struct gps_data_t *gps_data_ptr, void (fn)(struct gps_data_t *)
                 exit(1);
             } else {
                 if (isGPSDataValid(gps_data_ptr)) {
-                    fn(gps_data_ptr);
+                    gpsProcessor(gps_data_ptr);
                 }
             }
         }

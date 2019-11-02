@@ -13,4 +13,6 @@ void moveCursorUp(int numberOfLines);
 
 void (*getOptionHandler(const int option))(struct gps_data_t *);
 
+void printOptions();
+
 #endif //ASSIGNMENT3_MAIN_UTILS_H
