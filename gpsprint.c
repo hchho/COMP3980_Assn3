@@ -6,7 +6,7 @@
 #include "main-utils.h"
 #include <gps.h>
 
-void printGpsData(struct gps_data_t *gps_data_ptr) {
+void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
     system("clear");
     int satellites_visible = gps_data_ptr->satellites_visible;
     printf("===============================================================================\n");
@@ -21,8 +21,12 @@ void printGpsData(struct gps_data_t *gps_data_ptr) {
                gps_data_ptr->skyview[i].ss);
     }
     printf("===============================================================================\n");
-    printf("Latitude: %f, Longitude: %f, Timestamp: %lf \n",
-           gps_data_ptr->fix.latitude,
-           gps_data_ptr->fix.longitude,
-           gps_data_ptr->fix.time);
+    if (isGPSDataValid) {
+        printf("Latitude: %f, Longitude: %f, Timestamp: %lf \n",
+               gps_data_ptr->fix.latitude,
+               gps_data_ptr->fix.longitude,
+               gps_data_ptr->fix.time);
+    } else {
+        printf("No data.\n");
+    }
 }

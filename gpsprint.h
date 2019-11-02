@@ -7,6 +7,6 @@
 
 #include <gps.h>
 
-void printGpsData(struct gps_data_t *gpsdata);
+void printGpsData(struct gps_data_t *gpsdata, bool isGPSDataValid);
 
 #endif //ASSIGNMENT3_GPSPRINT_H
