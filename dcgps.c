@@ -1,3 +1,22 @@
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		dcgps.c - This file contains the main function to start the program
+--
+-- PROGRAM:			PiDCGPS
+--
+-- FUNCTIONS:       N/A
+--
+-- DATE:			Oct 28, 2019
+--
+-- REVISIONS:       (N/A)
+--
+-- DESIGNER:		Michael Yu
+--
+-- PROGRAMMER:		Michael Yu
+--
+-- NOTES:
+-- This is the starting point for the application.
+----------------------------------------------------------------------------------------------------------------------*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,6 +24,25 @@
 #include "dcgps.h"
 #include "main-utils.h"
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:	main
+--
+-- DATE:		Nov 02, 2019
+--
+-- REVISIONS:	(N/A)
+--
+-- DESIGNER:	Michael Yu
+--
+-- PROGRAMMER:	Michael Yu
+--
+-- INTERFACE:	int main(void)
+--
+-- RETURNS:		int
+--
+-- NOTES:
+-- Call this function to start the program. This is where the program opens the sockets, accepts user input, and
+-- calls the main reading loop to process GPS data.
+----------------------------------------------------------------------------------------------------------------------*/
 int main() {
     setupSocket();
 
