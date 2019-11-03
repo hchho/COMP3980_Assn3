@@ -38,7 +38,7 @@ void handleError(int error) {
     }
 }
 
-void (*getOptionHandler(const int option))(struct gps_data_t *) {
+void (*getOptionHandler(const int option))(struct gps_data_t *, bool) {
     switch(option) {
         case 1: // Stream GPS data
             return printGpsData;
