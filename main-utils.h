@@ -13,7 +13,7 @@ void handleError(int error);
 
 void moveCursorUp(int numberOfLines);
 
-void (*getOptionHandler(const int option))(struct gps_data_t *);
+void (*getOptionHandler(const int option))(struct gps_data_t *, bool);
 
 void printOptions();
 
