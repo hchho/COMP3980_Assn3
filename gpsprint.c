@@ -8,7 +8,7 @@
 --
 -- DATE:			Oct 29, 2019
 --
--- REVISIONS:       (N/A)
+-- REVISIONS:       Revision 1 - Michael Yu: Add conversion from timestamp to localtime 
 --
 -- DESIGNER:		Henry Ho
 --
@@ -18,6 +18,7 @@
 #include "gpsprint.h"
 #include "main-utils.h"
 #include <gps.h>
+#include <time.h>
 
 /*------------------------------------------------------------------------------------------------------------------
 -- FUNCTION:	isGPSDataValid
@@ -54,12 +55,19 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
                gps_data_ptr->skyview[i].ss);
     }
     printf("===============================================================================\n");
+		
     if (isGPSDataValid) {
-        printf("Latitude: %f, Longitude: %f, Timestamp: %lf \n",
+		time_t rawTimestamp = gps_data_ptr->fix.time;
+		struct tm ts;
+		ts = *localtime(&rawTimestamp);
+		char 	datetimeBuf[80];
+		strftime(datetimeBuf, sizeof(datetimeBuf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+        printf("Latitude: %f, Longitude: %f, Timestamp: %s \n",
                gps_data_ptr->fix.latitude,
                gps_data_ptr->fix.longitude,
-               gps_data_ptr->fix.time);
+               datetimeBuf);
     } else {
         printf("No data.\n");
     }
 }
+
