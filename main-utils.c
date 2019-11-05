@@ -168,3 +168,4 @@ void printOptions() {
     printf("1 - Stream live GPS data\n");
     printf("2 - View location on Google Maps\n");
 }
+

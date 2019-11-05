@@ -37,3 +37,4 @@ void (*getOptionHandler(const int option))(struct gps_data_t *, bool);
 void printOptions();
 
 #endif //ASSIGNMENT3_MAIN_UTILS_H
+

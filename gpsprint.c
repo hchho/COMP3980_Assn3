@@ -96,3 +96,4 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
         printf("No data.\n");
     }
 }
+

@@ -62,3 +62,4 @@ void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid) {
     free(link);
     exit(1);
 }
+
