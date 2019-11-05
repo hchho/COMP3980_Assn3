@@ -24,6 +24,7 @@
 #define ASSIGNMENT3_MAIN_UTILS_H
 
 #include <gps.h>
+#include "ERRNO.h"
 
 void setupSocket();
 

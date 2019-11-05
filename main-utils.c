@@ -94,16 +94,16 @@ void moveCursorUp(int numberOfLines) {
 ----------------------------------------------------------------------------------------------------------------------*/
 void handleError(int error) {
     switch(error) {
-        case -1:
+        case GPS_GONE:
             printf("GPS signal gone\n");
             break;
-        case -2:
+        case GPS_ERROR:
             printf("GPS error\n");
             break;
-        case -3:
+        case GPS_TIMEOUT:
             printf("Timeout error\n");
             break;
-        case -4:
+        case NETWORK_ERROR:
             printf("Network error\n");
             break;
         default:
