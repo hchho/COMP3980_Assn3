@@ -76,7 +76,7 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
     printf("\t\t\t\tVisible Satellites: %d\n", satellites_visible);
     printf("-------------------------------------------------------------------------------\n");
     for (int i = 0; i < satellites_visible; i++) {
-        printf("Elevation: %d,\tPRN: %d,\tAzimuth: %d,\tUsed: %s,\t SNR: %f\n",
+        printf("Elevation: %d,\tPRN: %.2d,\tAzimuth: %d,\tUsed: %s,\t SNR: %f\n",
                gps_data_ptr->skyview[i].elevation,
                gps_data_ptr->skyview[i].PRN,
                gps_data_ptr->skyview[i].azimuth,
@@ -86,12 +86,12 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
     printf("===============================================================================\n");
 
     if (isGPSDataValid) {
-		time_t rawTimestamp = gps_data_ptr->fix.time;
 		char 	datetimeBuf[80];
-		printf("Latitude: %f, Longitude: %f, Timestamp: %s \n",
+                       unix_to_iso8601(gps_data_ptr->fix.time, datetimeBuf, sizeof(datetimeBuf));
+		printf("Latitude: %f, Longitude: %f, UTC Time: %s \n",
                gps_data_ptr->fix.latitude,
                gps_data_ptr->fix.longitude,
-               convertTimestampToLocal(rawTimestamp, datetimeBuf));
+               convertTimestampToLocal(gps_data_ptr->fix.time, datetimeBuf));
     } else {
         printf("No data.\n");
     }
