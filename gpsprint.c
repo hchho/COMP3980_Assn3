@@ -86,8 +86,8 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
     printf("===============================================================================\n");
 
     if (isGPSDataValid) {
+	    	// buffer to store the localtime string value from UNIX timestamp
 		char 	datetimeBuf[80];
-                       unix_to_iso8601(gps_data_ptr->fix.time, datetimeBuf, sizeof(datetimeBuf));
 		printf("Latitude: %f, Longitude: %f, UTC Time: %s \n",
                gps_data_ptr->fix.latitude,
                gps_data_ptr->fix.longitude,
