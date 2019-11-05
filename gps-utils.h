@@ -21,6 +21,7 @@
 #define ASSIGNMENT3_GPS_UTILS_H
 
 #include <gps.h>
+#include "ERRNO.h"
 
 bool isGPSDataValid(struct gps_data_t *gpsdata);
 

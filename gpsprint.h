@@ -20,6 +20,7 @@
 #define ASSIGNMENT3_GPSPRINT_H
 
 #include <gps.h>
+#include <stdlib.h>
 
 void printGpsData(struct gps_data_t *gpsdata, bool isGPSDataValid);
 
