@@ -17,13 +17,13 @@
 --
 ----------------------------------------------------------------------------------------------------------------------*/
 
-#include <errno.h>
+#include "ERRNO.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "gpsprint.h"
 #include "gps-utils.h"
 #include "main-utils.h"
-#include "ERRNO.h"
+#include "math.h"
 
 /*------------------------------------------------------------------------------------------------------------------
 -- FUNCTION:	isGPSDataValid
@@ -81,14 +81,14 @@ void readGPSFunc(struct gps_data_t *gps_data_ptr, void (gpsDataHandler)(struct g
         if (!gps_waiting(gps_data_ptr, TIMEOUT)) {
             printf("Waiting...%d sec\n", wait_count / 2);
             if (wait_count++ > MAX_WAIT) {
-                handleError(-3);
+                handleError(GPS_TIMEOUT);
                 exit(1);
             }
             moveCursorUp(1);
         } else {
             wait_count = 0;
-            if (gps_read(gps_data_ptr) == -1) { // Error getting GPS
-                handleError(-2);
+            if (gps_read(gps_data_ptr) == GPS_GONE) { // Error getting GPS
+                handleError(GPS_ERROR);
                 exit(1);
             } else {
                 gpsDataHandler(gps_data_ptr, isGPSDataValid(gps_data_ptr));

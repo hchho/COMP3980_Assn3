@@ -142,7 +142,6 @@ void (*getOptionHandler(const int option))(struct gps_data_t *, bool) {
         default:
             printf("Unvailable option\n");
             exit(1);
-            return;
     }
 }
 

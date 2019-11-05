@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "gpsprint.h": "c"
+        "gpsprint.h": "c",
+        "errno.h": "c"
     }
 }
