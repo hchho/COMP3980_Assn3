@@ -22,6 +22,7 @@
 #include <string.h>
 #include <gps.h>
 #include "dcgps.h"
+#include "ERRNO.h"
 #include "main-utils.h"
 
 /*------------------------------------------------------------------------------------------------------------------
@@ -55,7 +56,7 @@ int main() {
     unsigned int flags = WATCH_ENABLE | WATCH_JSON;
     
     if (gps_open(source.server, source.port, gps_data_ptr) != 0) {
-        handleError(-4);
+        handleError(NETWORK_ERROR);
         exit(1);
     }
 
@@ -79,3 +80,4 @@ int main() {
 
     return 0;
 }
+

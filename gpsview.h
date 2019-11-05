@@ -19,7 +19,9 @@
 #define ASSIGNMENT3_GPSVIEW_H
 
 #include <gps.h>
-
+#include <stdlib.h>
+#include <string.h>
 void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid);
 
 #endif //ASSIGNMENT3_GPSVIEW_H
+

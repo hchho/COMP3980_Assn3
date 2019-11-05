@@ -5,22 +5,52 @@
 --
 -- FUNCTIONS:
 --                  void printGpsData(struct gps_data_t *gpsdata, bool isGPSDataValid)
+--                	char* convertTimestampToLocal(time_t rawTimestamp, char* datetimeBuf)
 --
 -- DATE:			Oct 29, 2019
 --
--- REVISIONS:       (N/A)
+-- REVISIONS:       Revision 1 - Michael Yu: Add conversion from timestamp to localtime 
 --
--- DESIGNER:		Henry Ho
+-- DESIGNER:		Henry Ho, Michael Yu
 --
--- PROGRAMMER:		Henry Ho
+-- PROGRAMMER:		Henry Ho, Michael Yu
 --
 ----------------------------------------------------------------------------------------------------------------------*/
 #include "gpsprint.h"
 #include "main-utils.h"
 #include <gps.h>
+#include <time.h>
 
 /*------------------------------------------------------------------------------------------------------------------
--- FUNCTION:	isGPSDataValid
+-- FUNCTION:	convertTimestampToLocal
+--
+-- DATE:		Nov 4, 2019
+--
+-- REVISIONS:	(N/A)
+--
+-- DESIGNER:	Michael Yu
+--
+-- PROGRAMMER:	Michael Yu
+--
+-- INTERFACE:	char* convertTimestampToLocal(time_t rawTimestamp, char* datetimeBuf)
+--                  time_t rawTimestamp:    UNIX timestamp value to be converted into a localtime string
+--                  char* datetimeBuf       string containing the localtime value of the UNIX timestamp
+--
+-- RETURNS:		char*
+--                  pointer to the buffer that contains the localtime value of the UNIX timestamp
+--
+-- NOTES:
+-- Call this function to convert a UNIX timestamp to a localtime string format.
+----------------------------------------------------------------------------------------------------------------------*/
+char* convertTimestampToLocal(time_t rawTimestamp, char* datetimeBuf) {
+		struct  tm ts;
+		ts = *localtime(&rawTimestamp);
+		strftime(datetimeBuf, sizeof(datetimeBuf), "%x | %H:%M:%S %Z", &ts);
+		return datetimeBuf;
+}
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:	printGpsData
 --
 -- DATE:		Oct 31, 2019
 --
@@ -46,7 +76,7 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
     printf("\t\t\t\tVisible Satellites: %d\n", satellites_visible);
     printf("-------------------------------------------------------------------------------\n");
     for (int i = 0; i < satellites_visible; i++) {
-        printf("Elevation: %d,\tPRN: %d,\tAzimuth: %d,\tUsed: %s,\t SNR: %f\n",
+        printf("Elevation: %d,\tPRN: %.2d,\tAzimuth: %d,\tUsed: %s,\t SNR: %f\n",
                gps_data_ptr->skyview[i].elevation,
                gps_data_ptr->skyview[i].PRN,
                gps_data_ptr->skyview[i].azimuth,
@@ -54,12 +84,16 @@ void printGpsData(struct gps_data_t *gps_data_ptr, bool isGPSDataValid) {
                gps_data_ptr->skyview[i].ss);
     }
     printf("===============================================================================\n");
+
     if (isGPSDataValid) {
-        printf("Latitude: %f, Longitude: %f, Timestamp: %lf \n",
+	    	// buffer to store the localtime string value from UNIX timestamp
+		char 	datetimeBuf[80];
+		printf("Latitude: %f, Longitude: %f, UTC Time: %s \n",
                gps_data_ptr->fix.latitude,
                gps_data_ptr->fix.longitude,
-               gps_data_ptr->fix.time);
+               convertTimestampToLocal(gps_data_ptr->fix.time, datetimeBuf));
     } else {
         printf("No data.\n");
     }
 }
+

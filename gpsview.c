@@ -18,7 +18,7 @@
 #include "gpsview.h"
 
 /*------------------------------------------------------------------------------------------------------------------
--- FUNCTION:	isGPSDataValid
+-- FUNCTION:	viewGPSLocation
 --
 -- DATE:		Oct 31, 2019
 --
@@ -42,7 +42,7 @@ void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid) {
         return;
     }
 
-    char * link = (const char *) malloc(64);
+    char * link = (char *) malloc(64);
     *link = '\0';
 
     char latitude[16];
@@ -62,3 +62,4 @@ void viewGPSLocation(struct gps_data_t *gps_data_ptr, bool isDataValid) {
     free(link);
     exit(1);
 }
+
